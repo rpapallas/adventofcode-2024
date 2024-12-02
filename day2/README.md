@@ -1,8 +1,7 @@
 ## Running the solution
 
 ```
-cargo run --bin part_a
-cargo run --bin part_b
+cargo run
 ```
 
 ## Problem
