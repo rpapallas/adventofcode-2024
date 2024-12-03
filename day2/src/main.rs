@@ -51,12 +51,22 @@ fn level_is_safe(level: &[i32]) -> bool {
     true
 }
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let start = Instant::now();
-    let levels = read_levels("input.txt")?;
+fn solve_part_a(levels: &Vec<Vec<i32>>) {
     let mut number_of_safe_levels = 0;
 
-    for level in &levels {
+    for level in levels {
+        if level_is_safe(&level) {
+            number_of_safe_levels += 1;
+        }
+    }
+
+    println!("Part A: safe levels: {:?}", number_of_safe_levels);
+}
+
+fn solve_part_b(levels: &Vec<Vec<i32>>) {
+    let mut number_of_safe_levels = 0;
+
+    for level in levels {
         if level_is_safe(&level) {
             number_of_safe_levels += 1;
         } else {
@@ -71,9 +81,21 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     }
 
-    println!("Safe levels: {:?}", number_of_safe_levels);
-    let duration = start.elapsed();
-    println!("Time elapsed: {:?}", duration);
-    Ok(())
+    println!("Part B: safe levels: {:?}", number_of_safe_levels);
 }
 
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let levels = read_levels("input.txt")?;
+
+    let start = Instant::now();
+    solve_part_a(&levels);
+    let duration = start.elapsed();
+    println!("Time elapsed: {:?}\n", duration);
+
+    let start = Instant::now();
+    solve_part_b(&levels);
+    let duration = start.elapsed();
+    println!("Time elapsed: {:?}", duration);
+
+    Ok(())
+}
